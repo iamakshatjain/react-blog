@@ -1,12 +1,13 @@
 // import axios from 'axios';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
-export const fetchPosts  = () => {
+export const fetchPosts  = () => async dispatch => {
+		const response = await jsonPlaceholder.get("/posts");
 
-	const promise = jsonPlaceholder.get("/posts");
+		dispatch({
+			type : 'FETCH_POSTS',
+			payload : response
+		});
+	};
 
-	return({
-		type : 'FETCH_POSTS',
-		payload : promise
-	});
-};
+//since here there is only one line to the fetchPost action creater we return directly the function that we have.
