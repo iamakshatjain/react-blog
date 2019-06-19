@@ -10,13 +10,36 @@ class PostList extends React.Component{
 		this.props.fetchPosts();
 	}
 
+	renderList = () => {
+		return this.props.posts.map(post => {
+			return(
+				<div className="ui segment" key={post.id}>
+					<div className="item">
+						<i className="large middle icon user"/>
+						<div className="content">
+							<div className="description">
+								<h2>{post.title}</h2>
+								<p>{post.body}</p>
+							</div>
+						</div>
+					</div>
+				</div>	
+				);
+		});
+	} 
+
 	render(){
+			console.log(this.props.posts);
 				return(
-					<div>
-						PostList
+					<div className="ui relaxed divided list">
+						{this.renderList()}
 					</div>
 					);
 			}
 }
 
-export default connect(null,{fetchPosts})(PostList);
+const mapStateToProps = state => {
+	return {posts : state.posts};
+}
+
+export default connect(mapStateToProps,{fetchPosts})(PostList);
