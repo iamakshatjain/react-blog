@@ -8,5 +8,12 @@ export const fetchPosts  = () => async dispatch => {
 			payload : response.data
 		});
 	};
-
 //since here there is only one line to the fetchPost action creater we return directly the function that we have.
+
+export const fetchUser = (id) => async dispatch => {
+	const response = await jsonPlaceholder.get(`/users/${id}`);
+	dispatch({
+		type : 'FETCH_USER',
+		payload : response.data
+	});
+}
